@@ -12,7 +12,7 @@ export const HeaderContent = styled.SafeAreaView`
 margin-top: 45px;`
 
 export const HeaderText = styled.Text`
-    font-family: Roboto_500Medium;
+    font-family: "Roboto_500Medium";
     font-size: 24px;
     color: #333E33;
     text-align: center;

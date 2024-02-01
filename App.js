@@ -18,19 +18,12 @@ if (!fontLoaded && !fontError) {
 
   return (
     <ContainerApp>
-   
+      <StatusBar/>
       <Header/>
-      <Home/>
+      <Home
+      />
     
     </ContainerApp>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
