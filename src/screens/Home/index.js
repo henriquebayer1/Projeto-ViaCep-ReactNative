@@ -1,25 +1,25 @@
 import { useEffect, useState } from "react";
 import { BoxInput } from "../../../Components/BoxInput";
 import { AlignContainer, ContainerForm, FlexWrapContainer, ScrollForm } from "./style";
-import Axios from "react-native-axios/lib/core/Axios";
 import axios from "axios";
 
 
 
 export function Home() {
 
-const [cep, setCep] = useState("")
+const [cep, setCep] = useState("02737100")
 const [logradouro, setLogradouro] = useState("")
 const [bairro, setBairro] = useState("")
 const [cidade, setCidade] = useState("")
 const [estado, setEstado] = useState("")
 const [uf, setUf] = useState("")
 
-useEffect(async () => {
 
 
+const myFunction = async () => {
+  // run asynchronous tasks here
   if (cep != null && cep.length === 8 ) {
-   const endereco = await axios.get(`hhtps://viacep.com.br/ws/${cep}/json/`)
+   const endereco = await axios.get(`https://viacep.com.br/ws/${cep}/json/`)
 
    if (endereco.error) {
     alert("Verifique o CEP")
@@ -27,12 +27,19 @@ useEffect(async () => {
     
    }
    setBairro(endereco.data.bairro)
-   setCidade(endereco.data.cidade)
-   setEstado(endereco.data.estado)
+   setCidade(endereco.data.localidade)
+   setEstado(endereco.data.uf)
    setLogradouro(endereco.data.logradouro)
    setUf(endereco.data.uf)
   }
-},[cep])
+};
+
+//ERRO POR NAO USAR ARROW FUNCTION
+// useEffect(myFunction(),[cep]);
+
+useEffect(() => {
+  myFunction();
+},[cep]);
 return(
 
     <AlignContainer>
@@ -53,7 +60,7 @@ return(
           editable={false}
           keyType={"text"}
           fieldValue={logradouro}
-          onChangeText={(tx) => {setLogradouro(tx)}}
+          // onChangeText={(tx) => {setLogradouro(tx)}}
         />
           <BoxInput 
           textLabel={"Bairro"}
@@ -61,7 +68,7 @@ return(
           editable={false}
           keyType={"text"}
           fieldValue={bairro}
-          onChangeText={(tx) => {setBairro(tx)}}
+          // onChangeText={(tx) => {setBairro(tx)}}
         />
           <BoxInput 
           textLabel={"Cidade"}
@@ -69,7 +76,7 @@ return(
           editable={false}
           keyType={"text"}
           fieldValue={cidade}
-          onChangeText={(tx) => {setCidade(tx)}}
+          // onChangeText={(tx) => {setCidade(tx)}}
         />
         <FlexWrapContainer>
           <BoxInput 
@@ -79,7 +86,7 @@ return(
           editable={false}
           keyType={"text"}
           fieldValue={estado}
-          onChangeText={(tx) => {setEstado(tx)}}
+          // onChangeText={(tx) => {setEstado(tx)}}
         />
           <BoxInput 
           fieldWidth={28}
@@ -88,7 +95,7 @@ return(
           editable={false}
           keyType={"text"}
           fieldValue={uf}
-          onChangeText={(tx) => {setUf(tx)}}
+          // onChangeText={(tx) => {setUf(tx)}}
         />
         </FlexWrapContainer>
         </ContainerForm>
